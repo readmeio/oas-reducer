@@ -1,0 +1,271 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Responses with various schema formats",
+    "description": "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#schema-object",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://httpbin.org"
+    }
+  ],
+  "paths": {
+    "/top-level-array/simple": {
+      "post": {
+        "summary": "Simple Array",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArrayOfFlatObjects"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfFlatObjects"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/top-level-array/of-everything": {
+      "post": {
+        "summary": "Array of Everything",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ObjectOfEverything"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ObjectOfEverything"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/top-level-object/simple": {
+      "post": {
+        "summary": "Simple Object",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nest1": {
+                    "$ref": "#/components/schemas/FlatObject"
+                  },
+                  "nest2": {
+                    "$ref": "#/components/schemas/FlatObject"
+                  },
+                  "nest3": {
+                    "$ref": "#/components/schemas/FlatObject"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nest": {
+                      "$ref": "#/components/schemas/FlatObject"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/top-level-object/of-everything": {
+      "post": {
+        "summary": "Object of Everything",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjectOfEverything"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectOfEverything"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/multischema/of-everything": {
+      "post": {
+        "summary": "Multischema of Everything",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MultischemaOfEverything"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MultischemaOfEverything"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MultischemaOfEverything": {
+        "oneOf": [
+          {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ArrayOfObjectsOfObjectsAndArrays"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "objEverything": {
+                    "$ref": "#/components/schemas/ObjectOfEverything"
+                  },
+                  "flatObj": {
+                    "$ref": "#/components/schemas/FlatObject"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/ArrayOfPrimitives"
+          },
+          {
+            "$ref": "#/components/schemas/ArrayOfFlatObjects"
+          },
+          {
+            "$ref": "#/components/schemas/FlatObject"
+          },
+          {
+            "$ref": "#/components/schemas/ObjectOfEverything"
+          }
+        ]
+      },
+      "ArrayOfObjectsOfObjectsAndArrays": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ObjectOfObjectsAndArrays"
+        }
+      },
+      "ObjectOfEverything": {
+        "type": "object",
+        "properties": {
+          "ObjectOfObjectsAndArrays": {
+            "$ref": "#/components/schemas/ObjectOfObjectsAndArrays"
+          },
+          "ArrayOfObjectsOfObjectsAndArrays": {
+            "$ref": "#/components/schemas/ArrayOfObjectsOfObjectsAndArrays"
+          },
+          "StringPrimitive": {
+            "type": "string"
+          }
+        }
+      },
+      "ArrayOfPrimitives": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "ArrayOfFlatObjects": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/FlatObject"
+        }
+      },
+      "ObjectOfObjectsAndArrays": {
+        "type": "object",
+        "properties": {
+          "ObjectPropInArray": {
+            "$ref": "#/components/schemas/FlatObject"
+          },
+          "PrimitiveArrayPropInArray": {
+            "$ref": "#/components/schemas/ArrayOfPrimitives"
+          },
+          "ObjectArrayPropInArray": {
+            "$ref": "#/components/schemas/ArrayOfFlatObjects"
+          },
+          "StringPrimitive": {
+            "type": "string"
+          }
+        }
+      },
+      "FlatObject": {
+        "type": "object",
+        "properties": {
+          "StringProp": {
+            "type": "string"
+          },
+          "BoolProp": {
+            "type": "boolean"
+          },
+          "NumProp": {
+            "type": "number"
+          },
+          "nestedProp": {
+            "$ref": "#/components/schemas/FlatObject"
+          }
+        }
+      }
+    }
+  }
+}
