@@ -1,17 +1,14 @@
-const { prompt, MultiSelect } = require('enquirer');
+/* eslint-disable import/no-dynamic-require,global-require
+ */
 const inquirer = require('inquirer');
-const jsonpath = require('jsonpath');
 
 const question = [
   {
     type: 'input',
     name: 'spec',
     message: 'Enter the path to your spec file:',
-    default: '/Users/emilykuo/Downloads/huge-oas.json',
-    result: pathToSpec => {
-      // TODO: pass this to other questions
-      return require(pathToSpec);
-    },
+    default: '/Users/rafegoldberg/Downloads/petstore.json',
+    filter: pathToSpec => require(pathToSpec),
   },
   {
     type: 'select',
@@ -24,26 +21,28 @@ const question = [
     ],
   },
   {
-    type: 'autocomplete',
+    type: 'checkbox',
     name: 'paths',
     message: 'Choose which paths to reduce by:',
     multiple: true,
     default: [],
-    skip() {
-      console.log('reduceBy', this.state.answers.reduceBy)
-      return this.state.answers.reduceBy !== 'paths';
-    },
-    choices() {
-      const spec = this.state.answers.spec;
-      // console.log('spec.paths', spec.paths)
+    when: answers => answers.reduceBy === 'paths',
+    choices: answers => {
+      const spec = answers.spec;
       return Object.keys(spec.paths);
     },
-    result(paths) {
-      // do something with the paths
-      const spec = this.state.answers.spec;
-      return paths.map(path => spec.paths[path]);
+    filter: (paths, answers) => {
+      const spec = answers.spec;
+      const each = paths.map(path => Object.keys(spec.paths[path])).flat();
+      return [...new Set(each)].reduce((acc, p) => {
+        acc[p] = each;
+        return acc;
+      }, {});
     },
   },
 ];
 
-inquirer.prompt(question).then(args => console.log(args));
+inquirer.prompt(question).then((answers, ...rest) => {
+  answers.spec = '{ SPEC HIDDEN FOR BREVITY }';
+  console.log(JSON.stringify({ answers, rest }, null, 2));
+});
