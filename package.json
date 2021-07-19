@@ -18,7 +18,8 @@
   "dependencies": {
     "inquirer": "^8.1.2",
     "jsonpath": "^1.1.1",
-    "jsonpointer": "^4.1.0"
+    "jsonpointer": "^4.1.0",
+    "oas-normalize": "^3.0.3"
   },
   "devDependencies": {
     "@readme/eslint-config": "^5.2.0",
