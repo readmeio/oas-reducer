@@ -1,11 +1,19 @@
 {
   "name": "oas-reducer",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Reduce an OpenAPI definition into a smaller subset.",
+  "license": "ISC",
+  "main": "src/index.js",
+  "bin": {
+    "oas": "bin/oas-reducer"
+  },
+  "engines": {
+    "node": "^12 || ^14 || ^16"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
 }
