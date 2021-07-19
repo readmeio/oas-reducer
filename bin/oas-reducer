@@ -1,0 +1,65 @@
+#! /usr/bin/env node
+const inquirer = require('inquirer');
+const jsonpath = require('jsonpath');
+
+const OASNormalize = require('oas-normalize');
+const OASReduce = require('../src');
+
+const prompt = inquirer.createPromptModule({ output: process.stderr });
+
+const questions = [
+  {
+    type: 'input',
+    name: 'spec',
+    message: 'Enter the path to your spec file:',
+    default: '/Users/rafegoldberg/Downloads/huge-oas.json',
+    filter: pathToSpec => new OASNormalize(pathToSpec, { enablePaths: true }).load(),
+  },
+  {
+    type: 'list',
+    name: 'reduceBy',
+    message: 'Would you like to reduce by paths or tags',
+    default: 'tags',
+    choices: [
+      { name: 'paths', message: 'Paths', value: 'paths' },
+      { name: 'tags', message: 'Tags', value: 'tags' },
+    ],
+  },
+  {
+    type: 'checkbox',
+    name: 'paths',
+    message: 'Choose which paths to reduce by:',
+    default: [],
+    when: answers => {
+      return answers.reduceBy === 'paths';
+    },
+    choices: answers => {
+      const spec = answers.spec;
+      return Object.keys(spec.paths);
+    },
+    filter: (paths, answers) => {
+      const spec = answers.spec;
+      const each = paths.map(path => Object.keys(spec.paths[path])).flat();
+      return paths.reduce((acc, p) => {
+        acc[p] = each;
+        return acc;
+      }, {});
+    },
+  },
+  {
+    type: 'checkbox',
+    name: 'tags',
+    message: 'Choose which tags to reduce by:',
+    when: answers => answers.reduceBy === 'tags',
+    choices: answers => {
+      const spec = answers.spec;
+      const tags = jsonpath.query(spec, '$..paths..tags').flat();
+      return [...new Set(tags)];
+    },
+  },
+];
+
+prompt(questions).then(answers => {
+  const reduction = OASReduce(answers.spec, answers);
+  console.log(JSON.stringify(reduction, null, 2));
+});
