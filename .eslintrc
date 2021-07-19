@@ -1,0 +1,7 @@
+{
+  "extends": "@readme/eslint-config",
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}
