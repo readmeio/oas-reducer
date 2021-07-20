@@ -1,0 +1,143 @@
+#! /usr/bin/env node
+const args = process.argv.slice(2);
+const pkg = require('../package.json');
+const fs = require('fs');
+
+const chalk = require('chalk');
+const inquirer = require('inquirer');
+const jsonpath = require('jsonpath');
+
+const OASNormalize = require('oas-normalize');
+const OASReduce = require('../src');
+
+if (args.includes('--version')) {
+  console.log(pkg.version);
+  process.exit();
+} else if (args.includes('--help')) {
+  console.log('Usage: oas-reducer <file>');
+  console.log('');
+  process.exit();
+}
+
+inquirer.registerPrompt('fuzzypath', require('inquirer-fuzzy-path'));
+
+inquirer
+  .prompt([
+    {
+      type: 'fuzzypath',
+      name: 'filePath',
+      excludePath: nodePath => nodePath.startsWith('node_modules') || nodePath.startsWith('.git/'),
+      excludeFilter: nodePath => nodePath === '.',
+      when: answers => {
+        // If the user is supplying a path to the CLI, prefill this answer out because Inquirer's `default` doesn't
+        // get processed if `when` is set to skip a question.
+        if (args.length) {
+          // eslint-disable-next-line no-param-reassign
+          answers.filePath = args.shift();
+          return false;
+        }
+
+        return true;
+      },
+      itemType: 'file',
+      message: 'Enter the path to an API definition to reduce:',
+      suggestOnly: false,
+      depthLimit: 5,
+    },
+  ])
+  .then(({ filePath }) => {
+    return new OASNormalize(filePath, { enablePaths: true }).load();
+  })
+  .then(apiDefinition => {
+    return inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'reduceBy',
+          message: 'Would you like to reduce by paths or tags?',
+          default: 'tags',
+          choices: [
+            { name: 'tags', message: 'Tags', value: 'tags' },
+            { name: 'paths', message: 'Paths', value: 'paths' },
+          ],
+        },
+        {
+          type: 'checkbox',
+          name: 'tags',
+          message: 'Choose which tags to reduce by:',
+          when: answers => answers.reduceBy === 'tags',
+          choices: () => {
+            const tags = jsonpath.query(apiDefinition, '$..paths..tags').flat();
+            return [...new Set(tags)];
+          },
+        },
+        {
+          type: 'checkbox',
+          name: 'paths',
+          message: 'Choose which paths to reduce by:',
+          default: [],
+          when: answers => answers.reduceBy === 'paths',
+          choices: () => {
+            return Object.keys(apiDefinition.paths);
+          },
+        },
+        {
+          type: 'checkbox',
+          name: 'methods',
+          message: 'Choose which available methods to reduce by:',
+          default: [],
+          when: answers => answers.reduceBy === 'paths',
+          choices: answers => {
+            const paths = answers.paths;
+            let methods = paths
+              .map(path => Object.keys(apiDefinition.paths[path]))
+              .flat()
+              .filter(method => method.toLowerCase() !== 'parameters');
+
+            methods = [...new Set(methods)];
+            methods.sort();
+
+            methods = methods.map(method => ({
+              name: method.toUpperCase(),
+              value: method,
+            }));
+
+            methods.push(new inquirer.Separator());
+            methods.push({ name: 'All', value: '*' });
+
+            return methods;
+          },
+          filter: methods => (methods.includes('*') || !methods.length ? '*' : methods),
+        },
+        {
+          type: 'input',
+          name: 'ouputPath',
+          message: 'Enter the path to save your reduced API definition to:',
+          validate: value => {
+            if (value.length) {
+              if (!fs.existsSync(value)) {
+                return true;
+              }
+
+              return 'Specified output path already exists.';
+            }
+
+            return 'An output path must be supplied.';
+          },
+        },
+      ])
+      .then(answers => {
+        const tags = answers.tags || [];
+        const methods = answers.methods || '*';
+        const paths = (answers.paths || []).reduce((acc, p) => {
+          acc[p] = methods;
+          return acc;
+        }, {});
+
+        const reduction = OASReduce(apiDefinition, { tags, paths });
+        fs.writeFileSync(answers.ouputPath, JSON.stringify(reduction, null, 2));
+
+        console.log('');
+        console.log(`API definition has been reduced to ${chalk.cyan(answers.ouputPath)}! 🏅`);
+      });
+  });
