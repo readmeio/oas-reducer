@@ -1,3 +1,9 @@
+## <small>1.0.1 (2021-07-20)</small>
+
+* fix: moving the husky install stage to a prepare script ([7136b6a](https://github.com/readmeio/oas-reducer/commit/7136b6a))
+
+
+
 ## 1.0.0 (2021-07-20)
 
 > 🏅 First release!
