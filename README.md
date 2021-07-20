@@ -27,4 +27,9 @@ console.log(
   * If you wish to retain all methods of a given path, supply `*` as the method array instead. Example: `{'/pet': '*'}`
 
 ### CLI
-tktk
+
+```shell
+$ oas-reducer <OpenAPI definition to reduce>
+```
+
+The CLI will walk you through a couple of questions about how and what you want to reduce the file by and then it'll prompt you to save the newly reduced API definition to a new file! 🏅
