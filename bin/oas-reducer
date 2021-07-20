@@ -45,9 +45,7 @@ inquirer
       depthLimit: 5,
     },
   ])
-  .then(({ filePath }) => {
-    return new OASNormalize(filePath, { enablePaths: true }).load();
-  })
+  .then(({ filePath }) => new OASNormalize(filePath, { enablePaths: true }).load())
   .then(apiDefinition => {
     return inquirer
       .prompt([
