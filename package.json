@@ -10,6 +10,13 @@
   "engines": {
     "node": "^12 || ^14 || ^16"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/readmeio/oas-reducer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/readmeio/oas-reducer/issues"
+  },
   "scripts": {
     "lint": "eslint .",
     "postinstall": "husky install",
