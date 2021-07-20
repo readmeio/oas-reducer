@@ -1,3 +1,9 @@
+## <small>1.0.3 (2021-07-20)</small>
+
+* docs: updating the readme to callout `-g` installs ([3616f03](https://github.com/readmeio/oas-reducer/commit/3616f03))
+
+
+
 ## <small>1.0.2 (2021-07-20)</small>
 
 * fix: oas-reducer bin typod in the package file ([7615d5a](https://github.com/readmeio/oas-reducer/commit/7615d5a))
