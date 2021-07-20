@@ -12,7 +12,9 @@
   },
   "scripts": {
     "lint": "eslint .",
+    "postinstall": "husky install",
     "prettier": "prettier --list-different --write \"./**/**.js\"",
+    "release": "conventional-changelog -i CHANGELOG.md -s",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -24,9 +26,13 @@
     "oas-normalize": "^3.0.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@readme/eslint-config": "^5.2.0",
     "@readme/oas-examples": "^4.2.0",
+    "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.31.0",
+    "husky": "^7.0.1",
     "jest": "^27.0.6",
     "prettier": "^2.3.2"
   },
@@ -35,5 +41,22 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules"
     ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        0,
+        "always",
+        "Infinity"
+      ],
+      "footer-max-line-length": [
+        0,
+        "always",
+        "Infinity"
+      ]
+    }
   }
 }
