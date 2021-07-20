@@ -3,11 +3,18 @@ const oasReducer = require('../src');
 const complexNesting = require('./__fixtures__/complex-nesting.json');
 const parametersCommon = require('./__fixtures__/parameters-common.json');
 const petstore = require('@readme/oas-examples/3.0/json/petstore.json');
+const swagger = require('@readme/oas-examples/2.0/json/petstore.json');
 const tagQuirks = require('./__fixtures__/tag-quirks.json');
 const uspto = require('@readme/oas-examples/3.0/json/uspto.json');
 
 test('it should not do anything if no reducers are supplied', () => {
   expect(oasReducer(petstore)).toStrictEqual(petstore);
+});
+
+test('should fail if given a Swagger 2.0 definition', () => {
+  expect(() => {
+    oasReducer(swagger);
+  }).toThrow('Sorry, OpenAPI v3.x definitions are supported.');
 });
 
 describe('tag reduction', () => {

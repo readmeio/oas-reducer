@@ -1,5 +1,6 @@
 const jsonPath = require('jsonpath');
 const jsonPointer = require('jsonpointer');
+const { version: apiDefinitionVersion } = require('oas-normalize/lib/utils');
 
 /**
  * Query a JSON Schema object for any `$ref` pointers. Return any pointers that were found.
@@ -45,6 +46,11 @@ module.exports = function oasReducer(definition, opts = {}) {
 
   const $refs = new Set();
   const usedTags = new Set();
+
+  const baseVersion = parseInt(apiDefinitionVersion(definition), 10);
+  if (baseVersion !== 3) {
+    throw new Error('Sorry, OpenAPI v3.x definitions are supported.');
+  }
 
   // Stringify and parse so we get a full non-reference clone of the API definition to work with.
   const reduced = JSON.parse(JSON.stringify(definition));

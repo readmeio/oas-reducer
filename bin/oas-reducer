@@ -8,6 +8,7 @@ const inquirer = require('inquirer');
 const jsonpath = require('jsonpath');
 
 const OASNormalize = require('oas-normalize');
+const { version: apiDefinitionVersion } = require('oas-normalize/lib/utils');
 const OASReduce = require('../src');
 
 if (args.includes('--version')) {
@@ -46,6 +47,14 @@ inquirer
     },
   ])
   .then(({ filePath }) => new OASNormalize(filePath, { enablePaths: true }).load())
+  .then(apiDefinition => {
+    const baseVersion = parseInt(apiDefinitionVersion(apiDefinition), 10);
+    if (baseVersion !== 3) {
+      throw new Error('Sorry, OpenAPI v3.x definitions are supported.');
+    }
+
+    return apiDefinition;
+  })
   .then(apiDefinition => {
     return inquirer
       .prompt([
@@ -138,4 +147,7 @@ inquirer
         console.log('');
         console.log(`API definition has been reduced to ${chalk.cyan(answers.ouputPath)}! 🏅`);
       });
+  })
+  .catch(err => {
+    console.error(chalk.red(err.message));
   });

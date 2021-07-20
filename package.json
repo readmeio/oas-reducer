@@ -20,6 +20,7 @@
   "scripts": {
     "lint": "eslint .",
     "postinstall": "husky install",
+    "pretest": "npm run lint",
     "prettier": "prettier --list-different --write \"./**/**.js\"",
     "release": "conventional-changelog -i CHANGELOG.md -s",
     "test": "jest --coverage"
