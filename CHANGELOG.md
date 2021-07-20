@@ -1,3 +1,9 @@
+## <small>1.0.4 (2021-07-20)</small>
+
+* chore: adding some keywords to the package file ([dc777c3](https://github.com/readmeio/oas-reducer/commit/dc777c3))
+
+
+
 ## <small>1.0.3 (2021-07-20)</small>
 
 * docs: updating the readme to callout `-g` installs ([3616f03](https://github.com/readmeio/oas-reducer/commit/3616f03))
