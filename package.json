@@ -17,6 +17,11 @@
   "bugs": {
     "url": "https://github.com/readmeio/oas-reducer/issues"
   },
+  "keywords": [
+    "openapi",
+    "oas",
+    "reducer"
+  ],
   "scripts": {
     "lint": "eslint .",
     "prepare": "husky install",
