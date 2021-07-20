@@ -66,5 +66,6 @@
         "Infinity"
       ]
     }
-  }
+  },
+  "keywords": ["oas", "swagger", "OpenAPI"]
 }
