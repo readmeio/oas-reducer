@@ -8,7 +8,7 @@ Reduce an OpenAPI definition into a smaller subset.
 ## Installation
 
 ```
-npm install oas-reducer
+npm install -g oas-reducer
 ```
 
 ## Usage
