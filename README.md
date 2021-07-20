@@ -21,6 +21,8 @@ console.log(
 );
 ```
 
+> ⚠️ Note that the API definition supplied here must be: an OpenAPI 3.x definition and a JSON object.
+
 #### Available options
 - `tags`: An array of tags to reduce by. Example: `['pet']`
 - `paths`: A key-value object of path+method combinations to reduce by. Example: `{'/pet': ['get', 'post']}`
@@ -33,3 +35,6 @@ $ oas-reducer <OpenAPI definition to reduce>
 ```
 
 The CLI will walk you through a couple of questions about how and what you want to reduce the file by and then it'll prompt you to save the newly reduced API definition to a new file! 🏅
+
+> ⚠️ Note that the API definition supplied here must be an OpenAPI 3.x definition and can be either a JSON or YAML file path.
+
