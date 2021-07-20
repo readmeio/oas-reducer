@@ -16,7 +16,9 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "chalk": "^4.1.1",
     "inquirer": "^8.1.2",
+    "inquirer-fuzzy-path": "^2.3.0",
     "jsonpath": "^1.1.1",
     "jsonpointer": "^4.1.0",
     "oas-normalize": "^3.0.3"

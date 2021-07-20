@@ -1,6 +1,9 @@
 {
   "extends": "@readme/eslint-config",
   "root": true,
+  "rules": {
+    "no-console": "off"
+  },
   "parserOptions": {
     "ecmaVersion": 2020
   }
