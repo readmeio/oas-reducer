@@ -27,7 +27,7 @@
     "prepare": "husky install",
     "pretest": "npm run lint",
     "prettier": "prettier --list-different --write \"./**/**.js\"",
-    "release": "conventional-changelog -i CHANGELOG.md -s",
+    "release": "npx conventional-changelog-cli -i CHANGELOG.md -s && git add CHANGELOG.md",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -39,15 +39,14 @@
     "oas-normalize": "^3.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
-    "@readme/eslint-config": "^5.2.0",
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@readme/eslint-config": "^8.2.0",
     "@readme/oas-examples": "^4.2.0",
-    "conventional-changelog-cli": "^2.1.1",
-    "eslint": "^7.31.0",
-    "husky": "^7.0.1",
-    "jest": "^27.0.6",
-    "prettier": "^2.3.2"
+    "eslint": "^8.8.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1"
   },
   "prettier": "@readme/eslint-config/prettier",
   "jest": {
