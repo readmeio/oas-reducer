@@ -13,7 +13,8 @@ function getUsedRefs(schema) {
 }
 
 /**
- * Recursively process a `$ref` pointer and accumulate any other `$ref` pointers that it or its children use.
+ * Recursively process a `$ref` pointer and accumulate any other `$ref` pointers that it or its
+ * children use.
  *
  * @param {Object} schema
  * @param {Set} $refs
@@ -33,8 +34,8 @@ function accumulateUsedRefs(schema, $refs, $ref) {
 }
 
 /**
- * With an array of tags or object of paths+method combinations, reduce an OpenAPI definition to a new definition that
- * just contains those tags or path+methods.
+ * With an array of tags or object of paths+method combinations, reduce an OpenAPI definition to a
+ * new definition that just contains those tags or path+methods.
  *
  * @param {Object} definition A valid OpenAPI definition
  * @param {Object} opts Option configuration to reduce by. See the README for details.
@@ -116,8 +117,8 @@ module.exports = function oasReducer(definition, opts = {}) {
       }
     });
 
-    // If we don't have any more paths after cleanup, throw an error because an OpenAPI file must have at least one
-    // path.
+    // If we don't have any more paths after cleanup, throw an error because an OpenAPI file must
+    // have at least one path.
     if (!Object.keys(reduced.paths).length) {
       throw new Error('All paths in the API definition were removed. Did you supply the right path name to reduce by?');
     }
