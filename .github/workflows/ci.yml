@@ -7,7 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version:
+          - 14
+          - 16
+          - 18
 
     steps:
       - uses: actions/checkout@v3
@@ -17,15 +20,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install npm@7
-        run: npm install -g npm@7
+      - run: npm ci
 
-      - name: Install deps
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
+      - run: npm test
         env:
-          # `chalk` has troubles with color detection while on CI and also in how it's used within our tests.
+          # `chalk` has troubles with color detection while on CI and also in how it's used within
+          # our tests.
           # https://github.com/chalk/supports-color/issues/106
           FORCE_COLOR: 1
