@@ -1,3 +1,24 @@
+## 3.0.0 (2022-05-02)
+
+* feat: supporting node 18, dropping node 12 (#32) ([086dfa0](https://github.com/readmeio/oas-reducer/commit/086dfa0)), closes [#32](https://github.com/readmeio/oas-reducer/issues/32)
+* chore(deps-dev): bump @commitlint/cli from 16.2.3 to 16.2.4 (#28) ([0b0c640](https://github.com/readmeio/oas-reducer/commit/0b0c640)), closes [#28](https://github.com/readmeio/oas-reducer/issues/28)
+* chore(deps-dev): bump @commitlint/config-conventional (#30) ([29a6611](https://github.com/readmeio/oas-reducer/commit/29a6611)), closes [#30](https://github.com/readmeio/oas-reducer/issues/30)
+* chore(deps-dev): bump @readme/eslint-config from 8.5.1 to 8.7.3 (#24) ([d2c4605](https://github.com/readmeio/oas-reducer/commit/d2c4605)), closes [#24](https://github.com/readmeio/oas-reducer/issues/24)
+* chore(deps-dev): bump @readme/oas-examples from 4.4.0 to 5.0.0 (#18) ([8310326](https://github.com/readmeio/oas-reducer/commit/8310326)), closes [#18](https://github.com/readmeio/oas-reducer/issues/18)
+* chore(deps-dev): bump @readme/oas-examples from 5.0.0 to 5.1.1 (#31) ([b81099a](https://github.com/readmeio/oas-reducer/commit/b81099a)), closes [#31](https://github.com/readmeio/oas-reducer/issues/31)
+* chore(deps-dev): bump eslint from 8.11.0 to 8.12.0 (#19) ([3b5d9ef](https://github.com/readmeio/oas-reducer/commit/3b5d9ef)), closes [#19](https://github.com/readmeio/oas-reducer/issues/19)
+* chore(deps-dev): bump eslint from 8.12.0 to 8.14.0 (#25) ([618031d](https://github.com/readmeio/oas-reducer/commit/618031d)), closes [#25](https://github.com/readmeio/oas-reducer/issues/25)
+* chore(deps-dev): bump jest from 27.5.1 to 28.0.3 (#26) ([fad591c](https://github.com/readmeio/oas-reducer/commit/fad591c)), closes [#26](https://github.com/readmeio/oas-reducer/issues/26)
+* chore(deps-dev): bump prettier from 2.6.0 to 2.6.1 (#20) ([5e1d196](https://github.com/readmeio/oas-reducer/commit/5e1d196)), closes [#20](https://github.com/readmeio/oas-reducer/issues/20)
+* chore(deps-dev): bump prettier from 2.6.1 to 2.6.2 (#29) ([f1e7c94](https://github.com/readmeio/oas-reducer/commit/f1e7c94)), closes [#29](https://github.com/readmeio/oas-reducer/issues/29)
+* chore(deps-dev): bumping out of date dev deps (#17) ([9f5bb86](https://github.com/readmeio/oas-reducer/commit/9f5bb86)), closes [#17](https://github.com/readmeio/oas-reducer/issues/17)
+* chore(deps): bump inquirer from 8.2.0 to 8.2.2 (#21) ([a03233f](https://github.com/readmeio/oas-reducer/commit/a03233f)), closes [#21](https://github.com/readmeio/oas-reducer/issues/21)
+* chore(deps): bump inquirer from 8.2.2 to 8.2.4 (#27) ([a23286a](https://github.com/readmeio/oas-reducer/commit/a23286a)), closes [#27](https://github.com/readmeio/oas-reducer/issues/27)
+* chore(deps): bump oas-normalize from 5.1.1 to 5.2.0 (#22) ([2ea22df](https://github.com/readmeio/oas-reducer/commit/2ea22df)), closes [#22](https://github.com/readmeio/oas-reducer/issues/22)
+* chore(deps): bump oas-normalize from 5.2.0 to 6.0.0 (#23) ([d0d4425](https://github.com/readmeio/oas-reducer/commit/d0d4425)), closes [#23](https://github.com/readmeio/oas-reducer/issues/23)
+
+
+
 ## 2.0.0 (2022-01-31)
 
 * chore: adding some keywords to the package file ([dc777c3](https://github.com/readmeio/oas-reducer/commit/dc777c3))
