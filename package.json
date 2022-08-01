@@ -41,7 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
-    "@readme/eslint-config": "^8.5.1",
+    "@readme/eslint-config": "^9.0.0",
     "@readme/oas-examples": "^5.0.0",
     "eslint": "^8.11.0",
     "husky": "^8.0.1",
