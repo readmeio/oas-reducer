@@ -1,25 +1,26 @@
-const oasReducer = require('../src');
+import swagger from '@readme/oas-examples/2.0/json/petstore.json';
+import petstore from '@readme/oas-examples/3.0/json/petstore.json';
+import uspto from '@readme/oas-examples/3.0/json/uspto.json';
 
-const complexNesting = require('./__fixtures__/complex-nesting.json');
-const parametersCommon = require('./__fixtures__/parameters-common.json');
-const petstore = require('@readme/oas-examples/3.0/json/petstore.json');
-const swagger = require('@readme/oas-examples/2.0/json/petstore.json');
-const tagQuirks = require('./__fixtures__/tag-quirks.json');
-const uspto = require('@readme/oas-examples/3.0/json/uspto.json');
+import oasReducer from '../src';
+
+import complexNesting from './__fixtures__/complex-nesting.json';
+import parametersCommon from './__fixtures__/parameters-common.json';
+import tagQuirks from './__fixtures__/tag-quirks.json';
 
 test('it should not do anything if no reducers are supplied', () => {
-  expect(oasReducer(petstore)).toStrictEqual(petstore);
+  expect(oasReducer(petstore as any)).toStrictEqual(petstore);
 });
 
 test('should fail if given a Swagger 2.0 definition', () => {
   expect(() => {
-    oasReducer(swagger);
+    oasReducer(swagger as any);
   }).toThrow('Sorry, OpenAPI v3.x definitions are supported.');
 });
 
 describe('tag reduction', () => {
   it('should reduce by tags', () => {
-    const reduced = oasReducer(petstore, { tags: ['store'] });
+    const reduced = oasReducer(petstore as any, { tags: ['store'] });
 
     expect(reduced.tags).toStrictEqual([{ name: 'store', description: 'Access to Petstore orders' }]);
 
@@ -47,7 +48,7 @@ describe('tag reduction', () => {
   });
 
   it('should support reducing by tags that are only stored at the operation level', () => {
-    const reduced = oasReducer(tagQuirks, { tags: ['commerce'] });
+    const reduced = oasReducer(tagQuirks as any, { tags: ['commerce'] });
 
     expect(reduced.tags).toStrictEqual([{ name: 'store', description: 'Access to Petstore orders' }]);
 
@@ -61,7 +62,7 @@ describe('tag reduction', () => {
 
 describe('path reduction', () => {
   it('should reduce by paths', () => {
-    const reduced = oasReducer(petstore, {
+    const reduced = oasReducer(petstore as any, {
       paths: {
         '/store/order/{orderId}': ['get'],
       },
@@ -83,7 +84,7 @@ describe('path reduction', () => {
   });
 
   it('should support method wildcards', () => {
-    const reduced = oasReducer(petstore, {
+    const reduced = oasReducer(petstore as any, {
       paths: {
         '/store/order/{orderId}': '*',
       },
@@ -98,7 +99,7 @@ describe('path reduction', () => {
   });
 
   it('should support reducing common parameters', () => {
-    const reduced = oasReducer(parametersCommon, {
+    const reduced = oasReducer(parametersCommon as any, {
       paths: {
         '/anything/{id}': ['get'],
       },
@@ -114,7 +115,7 @@ describe('path reduction', () => {
 });
 
 test('should support retaining deeply nested used $ref pointers', () => {
-  const reduced = oasReducer(complexNesting, { paths: { '/multischema/of-everything': '*' } });
+  const reduced = oasReducer(complexNesting as any, { paths: { '/multischema/of-everything': '*' } });
 
   expect(reduced.components).toStrictEqual({
     schemas: {
@@ -130,17 +131,17 @@ test('should support retaining deeply nested used $ref pointers', () => {
 });
 
 test("it should not leave any components if there aren't any in use", () => {
-  const reduced = oasReducer(uspto, { paths: { '/{dataset}/{version}/records': '*' } });
+  const reduced = oasReducer(uspto as any, { paths: { '/{dataset}/{version}/records': '*' } });
 
   expect(reduced.components).toBeUndefined();
 });
 
 test('should throw an error if we end up with a definition that has no paths', () => {
   expect(() => {
-    oasReducer(petstore, { tags: ['unknownTag'] });
+    oasReducer(petstore as any, { tags: ['unknownTag'] });
   }).toThrow('All paths in the API definition were removed. Did you supply the right path name to reduce by?');
 
   expect(() => {
-    oasReducer(petstore, { paths: { '/unknownPath': '*' } });
+    oasReducer(petstore as any, { paths: { '/unknownPath': '*' } });
   }).toThrow('All paths in the API definition were removed. Did you supply the right path name to reduce by?');
 });

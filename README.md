@@ -1,6 +1,7 @@
 # oas-reducer
 
 Reduce an OpenAPI definition into a smaller subset.
+
 [![Build](https://github.com/readmeio/oas-reducer/workflows/CI/badge.svg)](https://github.com/readmeio/oas-reducer/) [![](https://img.shields.io/npm/v/oas-reducer)](https://npm.im/oas-reducer)
 
 [![](https://d3vv6lp55qjaqc.cloudfront.net/items/1M3C3j0I0s0j3T362344/Untitled-2.png)](https://readme.com)
@@ -12,7 +13,9 @@ npm install -g oas-reducer
 ```
 
 ## Usage
+
 ### Library
+
 ```js
 const oasReducer = require('oas-reducer');
 
@@ -24,9 +27,10 @@ console.log(
 > ⚠️ Note that the API definition supplied here must be: an OpenAPI 3.x definition and a JSON object.
 
 #### Available options
+
 - `tags`: An array of tags to reduce by. Example: `['pet']`
-- `paths`: A key-value object of path+method combinations to reduce by. Example: `{'/pet': ['get', 'post']}`
-  * If you wish to retain all methods of a given path, supply `*` as the method array instead. Example: `{'/pet': '*'}`
+- `paths`: A key-value object of path + method combinations to reduce by. Example: `{'/pet': ['get', 'post']}`
+  - If you wish to retain all methods of a given path, supply `*` as the method array instead. Example: `{'/pet': '*'}`
 
 ### CLI
 
@@ -37,4 +41,3 @@ $ oas-reducer <OpenAPI definition to reduce>
 The CLI will walk you through a couple of questions about how and what you want to reduce the file by and then it'll prompt you to save the newly reduced API definition to a new file! 🏅
 
 > ⚠️ Note that the API definition supplied here must be an OpenAPI 3.x definition and can be either a JSON or YAML file path.
-
