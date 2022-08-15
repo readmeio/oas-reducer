@@ -1,6 +1,10 @@
-const jsonPath = require('jsonpath');
-const jsonPointer = require('jsonpointer');
-const { version: apiDefinitionVersion } = require('oas-normalize/lib/utils');
+import type { OpenAPIV3, OpenAPIV3_1 } from 'openapi-types';
+
+import jsonPath from 'jsonpath';
+import jsonPointer from 'jsonpointer';
+import { version as getAPIDefinitionVersion } from 'oas-normalize/dist/lib/utils';
+
+export type OpenAPI3Document = OpenAPIV3.Document | OpenAPIV3_1.Document;
 
 /**
  * Query a JSON Schema object for any `$ref` pointers. Return any pointers that were found.
@@ -8,7 +12,7 @@ const { version: apiDefinitionVersion } = require('oas-normalize/lib/utils');
  * @param {Object} schema
  * @returns Array
  */
-function getUsedRefs(schema) {
+function getUsedRefs(schema: unknown) {
   return jsonPath.query(schema, "$..['$ref']");
 }
 
@@ -16,11 +20,8 @@ function getUsedRefs(schema) {
  * Recursively process a `$ref` pointer and accumulate any other `$ref` pointers that it or its
  * children use.
  *
- * @param {Object} schema
- * @param {Set} $refs
- * @param {String} $ref
  */
-function accumulateUsedRefs(schema, $refs, $ref) {
+function accumulateUsedRefs(schema: Record<string, unknown>, $refs: Set<string>, $ref: string): void {
   const $refSchema = jsonPointer.get(schema, $ref.substring(1));
   getUsedRefs($refSchema).forEach(currRef => {
     // If we've already processed this $ref don't send us into an infinite loop.
@@ -41,14 +42,20 @@ function accumulateUsedRefs(schema, $refs, $ref) {
  * @param {Object} opts Option configuration to reduce by. See the README for details.
  * @returns Object
  */
-module.exports = function oasReducer(definition, opts = {}) {
+export default function oasReducer(
+  definition: OpenAPI3Document,
+  opts: {
+    paths?: Record<string, string[] | '*'>;
+    tags?: string[];
+  } = {}
+) {
   const reduceTags = 'tags' in opts ? opts.tags : [];
   const reducePaths = 'paths' in opts ? opts.paths : {};
 
-  const $refs = new Set();
-  const usedTags = new Set();
+  const $refs: Set<string> = new Set();
+  const usedTags: Set<string> = new Set();
 
-  const baseVersion = parseInt(apiDefinitionVersion(definition), 10);
+  const baseVersion = parseInt(getAPIDefinitionVersion(definition as any), 10);
   if (baseVersion !== 3) {
     throw new Error('Sorry, OpenAPI v3.x definitions are supported.');
   }
@@ -91,7 +98,7 @@ module.exports = function oasReducer(definition, opts = {}) {
 
         // Accumulate a list of used tags so we can filter out any ones that we don't need later.
         if ('tags' in operation) {
-          operation.tags.forEach(tag => {
+          operation.tags.forEach((tag: string) => {
             usedTags.add(tag);
           });
         }
@@ -148,9 +155,9 @@ module.exports = function oasReducer(definition, opts = {}) {
     }
   }
 
-  // REmove any unused tags.
+  // Remove any unused tags.
   if ('tags' in reduced) {
-    reduced.tags.forEach((tag, k) => {
+    reduced.tags.forEach((tag: OpenAPIV3_1.TagObject, k: number) => {
       if (!usedTags.has(tag.name)) {
         delete reduced.tags[k];
       }
@@ -165,4 +172,4 @@ module.exports = function oasReducer(definition, opts = {}) {
   }
 
   return reduced;
-};
+}
