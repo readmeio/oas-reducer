@@ -17,7 +17,7 @@ npm install -g oas-reducer
 ### Library
 
 ```js
-const oasReducer = require('oas-reducer');
+import oasReducer from 'oas-reducer';
 
 console.log(
   oasReducer(<OpenAPI definition>, options)
