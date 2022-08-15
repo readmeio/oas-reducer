@@ -3,8 +3,8 @@
   "version": "3.0.0",
   "description": "Reduce an OpenAPI definition into a smaller subset.",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "bin": {
     "oas-reducer": "bin/oas-reducer"
   },

@@ -9,10 +9,8 @@ export type OpenAPI3Document = OpenAPIV3.Document | OpenAPIV3_1.Document;
 /**
  * Query a JSON Schema object for any `$ref` pointers. Return any pointers that were found.
  *
- * @param {Object} schema
- * @returns Array
  */
-function getUsedRefs(schema: unknown) {
+function getUsedRefs(schema: Record<string, unknown>) {
   return jsonPath.query(schema, "$..['$ref']");
 }
 
@@ -36,11 +34,21 @@ function accumulateUsedRefs(schema: Record<string, unknown>, $refs: Set<string>,
 
 /**
  * With an array of tags or object of paths+method combinations, reduce an OpenAPI definition to a
- * new definition that just contains those tags or path+methods.
+ * new definition that just contains those tags or path + methods.
  *
- * @param {Object} definition A valid OpenAPI definition
- * @param {Object} opts Option configuration to reduce by. See the README for details.
- * @returns Object
+ * @example <caption>Reduce by an array of tags only.</caption>
+ * { tags: ['pet] }
+ *
+ * @example <caption>Reduce by a specific path and methods.</caption>
+ * { paths: { '/pet': ['get', 'post'] } }
+ *
+ * @example <caption>Reduce by a specific path and all methods it has.</caption>
+ * { { paths: { '/pet': '*' } }  }
+ *
+ * @param definition A valid OpenAPI 3.x definition
+ * @param opts Option configuration to reduce by. See the README for details.
+ * @param opts.tags An array of tags in the OpenAPI definition to reduce by.
+ * @param opts.paths A key-value object of path + method combinations to reduce by.
  */
 export default function oasReducer(
   definition: OpenAPI3Document,

@@ -29,7 +29,7 @@ console.log(
 #### Available options
 
 - `tags`: An array of tags to reduce by. Example: `['pet']`
-- `paths`: A key-value object of path+method combinations to reduce by. Example: `{'/pet': ['get', 'post']}`
+- `paths`: A key-value object of path + method combinations to reduce by. Example: `{'/pet': ['get', 'post']}`
   - If you wish to retain all methods of a given path, supply `*` as the method array instead. Example: `{'/pet': '*'}`
 
 ### CLI
