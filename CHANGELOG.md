@@ -1,3 +1,29 @@
+## 4.0.0 (2022-08-15)
+
+* feat: rewriting the library in Typescript, licensing to MIT (#53) ([95ff517](https://github.com/readmeio/oas-reducer/commit/95ff517)), closes [#53](https://github.com/readmeio/oas-reducer/issues/53)
+* chore(deps-dev): bump @commitlint/cli from 16.2.4 to 17.0.2 (#36) ([54ffb16](https://github.com/readmeio/oas-reducer/commit/54ffb16)), closes [#36](https://github.com/readmeio/oas-reducer/issues/36)
+* chore(deps-dev): bump @commitlint/cli from 17.0.2 to 17.0.3 (#42) ([028aa63](https://github.com/readmeio/oas-reducer/commit/028aa63)), closes [#42](https://github.com/readmeio/oas-reducer/issues/42)
+* chore(deps-dev): bump @commitlint/config-conventional (#34) ([67664d4](https://github.com/readmeio/oas-reducer/commit/67664d4)), closes [#34](https://github.com/readmeio/oas-reducer/issues/34)
+* chore(deps-dev): bump @commitlint/config-conventional (#45) ([4035b32](https://github.com/readmeio/oas-reducer/commit/4035b32)), closes [#45](https://github.com/readmeio/oas-reducer/issues/45)
+* chore(deps-dev): bump @readme/eslint-config from 8.7.3 to 8.7.5 (#33) ([0fffb01](https://github.com/readmeio/oas-reducer/commit/0fffb01)), closes [#33](https://github.com/readmeio/oas-reducer/issues/33)
+* chore(deps-dev): bump @readme/eslint-config from 8.7.5 to 8.8.0 (#47) ([8707361](https://github.com/readmeio/oas-reducer/commit/8707361)), closes [#47](https://github.com/readmeio/oas-reducer/issues/47)
+* chore(deps-dev): bump @readme/eslint-config from 8.8.0 to 9.0.0 (#50) ([2ea67c6](https://github.com/readmeio/oas-reducer/commit/2ea67c6)), closes [#50](https://github.com/readmeio/oas-reducer/issues/50)
+* chore(deps-dev): bump @readme/oas-examples from 5.1.1 to 5.2.0 (#39) ([63a9d13](https://github.com/readmeio/oas-reducer/commit/63a9d13)), closes [#39](https://github.com/readmeio/oas-reducer/issues/39)
+* chore(deps-dev): bump @readme/oas-examples from 5.2.0 to 5.4.0 (#44) ([678bb31](https://github.com/readmeio/oas-reducer/commit/678bb31)), closes [#44](https://github.com/readmeio/oas-reducer/issues/44)
+* chore(deps-dev): bump @readme/oas-examples from 5.4.0 to 5.5.0 (#51) ([b88b15d](https://github.com/readmeio/oas-reducer/commit/b88b15d)), closes [#51](https://github.com/readmeio/oas-reducer/issues/51)
+* chore(deps-dev): bump eslint from 8.14.0 to 8.16.0 (#37) ([9a311f0](https://github.com/readmeio/oas-reducer/commit/9a311f0)), closes [#37](https://github.com/readmeio/oas-reducer/issues/37)
+* chore(deps-dev): bump eslint from 8.16.0 to 8.18.0 (#40) ([fc57642](https://github.com/readmeio/oas-reducer/commit/fc57642)), closes [#40](https://github.com/readmeio/oas-reducer/issues/40)
+* chore(deps-dev): bump eslint from 8.18.0 to 8.21.0 (#52) ([49dad59](https://github.com/readmeio/oas-reducer/commit/49dad59)), closes [#52](https://github.com/readmeio/oas-reducer/issues/52)
+* chore(deps-dev): bump husky from 7.0.4 to 8.0.1 (#35) ([3545078](https://github.com/readmeio/oas-reducer/commit/3545078)), closes [#35](https://github.com/readmeio/oas-reducer/issues/35)
+* chore(deps-dev): bump jest from 28.0.3 to 28.1.0 (#38) ([383bebb](https://github.com/readmeio/oas-reducer/commit/383bebb)), closes [#38](https://github.com/readmeio/oas-reducer/issues/38)
+* chore(deps-dev): bump jest from 28.1.0 to 28.1.2 (#41) ([d8b6e3a](https://github.com/readmeio/oas-reducer/commit/d8b6e3a)), closes [#41](https://github.com/readmeio/oas-reducer/issues/41)
+* chore(deps-dev): bump jest from 28.1.2 to 28.1.3 (#48) ([cecd5bf](https://github.com/readmeio/oas-reducer/commit/cecd5bf)), closes [#48](https://github.com/readmeio/oas-reducer/issues/48)
+* chore(deps-dev): bump prettier from 2.6.2 to 2.7.1 (#43) ([7faacd1](https://github.com/readmeio/oas-reducer/commit/7faacd1)), closes [#43](https://github.com/readmeio/oas-reducer/issues/43)
+* chore(deps): bump jsonpointer from 5.0.0 to 5.0.1 (#49) ([8a4a8c8](https://github.com/readmeio/oas-reducer/commit/8a4a8c8)), closes [#49](https://github.com/readmeio/oas-reducer/issues/49)
+* ci: ignoring inquirer updates after v9 because its ESM-only ([9342226](https://github.com/readmeio/oas-reducer/commit/9342226))
+
+
+
 ## 3.0.0 (2022-05-02)
 
 * feat: supporting node 18, dropping node 12 (#32) ([086dfa0](https://github.com/readmeio/oas-reducer/commit/086dfa0)), closes [#32](https://github.com/readmeio/oas-reducer/issues/32)

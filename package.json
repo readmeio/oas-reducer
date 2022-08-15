@@ -1,6 +1,6 @@
 {
   "name": "oas-reducer",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Reduce an OpenAPI definition into a smaller subset.",
   "license": "MIT",
   "main": "dist/src/index.js",
