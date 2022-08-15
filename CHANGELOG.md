@@ -1,3 +1,9 @@
+## <small>4.0.1 (2022-08-15)</small>
+
+* docs: updates ([e8031c8](https://github.com/readmeio/oas-reducer/commit/e8031c8))
+
+
+
 ## 4.0.0 (2022-08-15)
 
 * feat: rewriting the library in Typescript, licensing to MIT (#53) ([95ff517](https://github.com/readmeio/oas-reducer/commit/95ff517)), closes [#53](https://github.com/readmeio/oas-reducer/issues/53)
