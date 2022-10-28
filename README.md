@@ -1,3 +1,7 @@
+> **Warning**
+>
+> `oas-reducer` has moved! If you're looking for the CLI reducer you can use it in [rdme](https://npm.im/rdme) with its `rdme openapi:reduce` command, ad if you're looking for the programmatic API aspect of this library that has been relocated into [oas](https://npm.im/oas)
+
 # oas-reducer
 
 Reduce an OpenAPI definition into a smaller subset.
